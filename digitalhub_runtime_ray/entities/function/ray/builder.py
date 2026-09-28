@@ -4,9 +4,10 @@
 
 from __future__ import annotations
 
-from digitalhub_runtime_ray.entities._base.runtime_entity.builder import RuntimeEntityBuilderRay
-from digitalhub_runtime_ray.entities.enums import EntityKinds
 from digitalhub_runtime_python.entities.function._base.builder import FunctionBaseBuilder
+
+from digitalhub_runtime_ray.entities._base.runtime_entity.builder import RuntimeEntityBuilderRay
+from digitalhub_runtime_ray.entities._commons.enums import EntityKinds
 from digitalhub_runtime_ray.entities.function.ray.entity import FunctionRay
 from digitalhub_runtime_ray.entities.function.ray.spec import FunctionSpecRay, FunctionValidatorRay
 from digitalhub_runtime_ray.entities.function.ray.status import FunctionStatusRay

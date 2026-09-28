@@ -5,7 +5,6 @@
 from __future__ import annotations
 
 from digitalhub.entities.function._base.spec import FunctionSpec, FunctionValidator
-
 from digitalhub_runtime_python.entities.function.python.models import PythonVersion, SourceValidator
 
 

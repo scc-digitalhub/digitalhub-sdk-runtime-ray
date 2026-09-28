@@ -7,7 +7,7 @@ from __future__ import annotations
 from digitalhub.entities.run._base.builder import RunBuilder
 
 from digitalhub_runtime_ray.entities._base.runtime_entity.builder import RuntimeEntityBuilderRay
-from digitalhub_runtime_ray.entities.enums import EntityKinds
+from digitalhub_runtime_ray.entities._commons.enums import EntityKinds
 from digitalhub_runtime_ray.entities.run.ray_build.entity import RunRayRunBuild
 from digitalhub_runtime_ray.entities.run.ray_build.spec import RunSpecRayRunBuild, RunValidatorRayRunBuild
 from digitalhub_runtime_ray.entities.run.ray_build.status import RunStatusRayRunBuild

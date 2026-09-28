@@ -4,8 +4,8 @@
 
 from __future__ import annotations
 
-from digitalhub_runtime_python.runtimes.runtime import RuntimePython
 from digitalhub.utils.logger.logger import get_logger
+from digitalhub_runtime_python.runtimes.runtime import RuntimePython
 
 logger = get_logger(__file__)
 

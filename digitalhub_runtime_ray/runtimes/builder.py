@@ -8,6 +8,7 @@ from digitalhub.runtimes.builder import RuntimeBuilder
 
 from digitalhub_runtime_ray.runtimes.runtime import RuntimeRay
 
+
 class RuntimeRayBuilder(RuntimeBuilder):
     """RuntimeRayBuilder class."""
 

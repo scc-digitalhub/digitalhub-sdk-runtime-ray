@@ -7,7 +7,8 @@ from __future__ import annotations
 from digitalhub.entities._commons.utils import map_actions
 from digitalhub.entities._mixin.runtime_entity.builder import RuntimeEntityBuilder
 
-from digitalhub_runtime_ray.entities.enums import Actions, EntityKinds
+from digitalhub_runtime_ray.entities._commons.enums import Actions, EntityKinds
+
 
 class RuntimeEntityBuilderRay(RuntimeEntityBuilder):
     EXECUTABLE_KIND = EntityKinds.FUNCTION_RAY.value
