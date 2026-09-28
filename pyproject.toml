@@ -32,7 +32,6 @@ local = [
 ]
 dev = [
     "digitalhub[dev]>=0.16.0b, <0.17",
-    "digitalhub-runtime-python>=0.16.0b, <0.17"
 ]
 
 [project.urls]
