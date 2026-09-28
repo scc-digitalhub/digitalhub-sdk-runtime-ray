@@ -9,10 +9,10 @@ entity_builders = tuple((plugin.kind, plugin.builder) for plugin in entity_plugi
 try:
     from digitalhub_runtime_ray.runtimes.builder import RuntimeRayBuilder
 
-    runtime_builders = tuple((kind, RuntimeRayBuilder) for kind in [e.value for e in EntityKinds])
+    runtime_builders = ((kind, RuntimeRayBuilder) for kind in [e.value for e in EntityKinds])
 except ImportError as e:
     from digitalhub.utils.logger.logger import get_logger
 
     logger = get_logger(__name__)
     logger.debug(f"Error importing runtime builders: {e}")
-    runtime_builders = tuple()
+    runtime_builders = ()
