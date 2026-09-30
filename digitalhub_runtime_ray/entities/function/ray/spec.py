@@ -5,7 +5,9 @@
 from __future__ import annotations
 
 from digitalhub.entities.function._base.spec import FunctionSpec, FunctionValidator
-from digitalhub_runtime_python.entities.function.python.models import PythonVersion, SourceValidator
+from digitalhub_runtime_python.entities.function.python.models import PythonVersion
+
+from digitalhub_runtime_ray.entities.function.ray.models import RaySourceValidator
 
 
 class FunctionSpecRay(FunctionSpec):
@@ -37,10 +39,10 @@ class FunctionValidatorRay(FunctionValidator):
     FunctionValidatorRay validator.
     """
 
-    source: SourceValidator
+    source: RaySourceValidator
     """Source code validator"""
 
-    python_version: PythonVersion
+    python_version: PythonVersion | None = None
     "Python version"
 
     image: str | None = None

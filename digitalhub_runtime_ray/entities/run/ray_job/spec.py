@@ -28,11 +28,12 @@ class RunSpecRayRunJob(RunSpecBaseRun):
         service_type: str | None = None,
         service_name: str | None = None,
         replicas: int | None = None,
+        min_replicas: int | None = None,
+        max_replicas: int | None = None,
         instructions: dict | None = None,
         inputs: dict | None = None,
         parameters: dict | None = None,
         init_parameters: dict | None = None,
-        local_execution: bool = False,
         **kwargs,
     ) -> None:
         super().__init__(
@@ -58,7 +59,10 @@ class RunSpecRayRunJob(RunSpecBaseRun):
             init_parameters,
             **kwargs,
         )
-        self.local_execution = local_execution
+        self.local_execution = False
+        self.replicas = replicas
+        self.min_replicas = min_replicas
+        self.max_replicas = max_replicas
 
 
 class RunValidatorRayRunJob(RunValidatorBaseRun):
@@ -66,3 +70,12 @@ class RunValidatorRayRunJob(RunValidatorBaseRun):
 
     local_execution: bool = False
     """Whether to execute the run locally instead of in the cluster."""
+
+    replicas: int | None = None
+    """Number of replicas for the run."""
+
+    min_replicas: int | None = None
+    """Minimum number of replicas for the run."""
+
+    max_replicas: int | None = None
+    """Maximum number of replicas for the run."""
