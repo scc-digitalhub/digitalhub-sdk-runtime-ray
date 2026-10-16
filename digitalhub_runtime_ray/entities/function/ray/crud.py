@@ -35,7 +35,24 @@ def new_function_ray(
     labels: list[str] | None = None,
     embedded: bool = False,
 ) -> FunctionRay:
-    """Create a Ray function entity."""
+    """
+    Create a Ray function entity.
+
+    Examples
+    --------
+    Create a Ray function from a local source file:
+
+    ```python
+    import digitalhub as dh
+
+    function = dh.new_function_ray(
+        project="my-project",
+        name="ray-training",
+        code_src="src/ray_train.py",
+        handler="ray_handler",
+    )
+    ```
+    """
     return new_function(
         project=project,
         name=name,
