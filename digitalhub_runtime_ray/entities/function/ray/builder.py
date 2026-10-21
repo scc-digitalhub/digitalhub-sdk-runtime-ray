@@ -11,8 +11,8 @@ from digitalhub_runtime_ray.entities._commons.enums import EntityKinds
 from digitalhub_runtime_ray.entities.function.ray.entity import FunctionRay
 from digitalhub_runtime_ray.entities.function.ray.spec import FunctionSpecRay, FunctionValidatorRay
 from digitalhub_runtime_ray.entities.function.ray.status import FunctionStatusRay
-
 from digitalhub_runtime_ray.entities.function.ray.utils import source_check
+
 
 class FunctionRayBuilder(FunctionBaseBuilder, RuntimeEntityBuilderRay):
     """

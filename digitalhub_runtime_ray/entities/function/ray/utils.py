@@ -4,13 +4,10 @@
 
 from __future__ import annotations
 
-import typing
-from pathlib import Path
-
 from digitalhub.utils.exceptions import EntityError
 from digitalhub.utils.generic_utils import encode_string
-
 from digitalhub_runtime_python.entities.function.python.models import Lang
+
 
 def source_check(**kwargs) -> dict:
     """
@@ -31,7 +28,6 @@ def source_check(**kwargs) -> dict:
     code = kwargs.pop("code", None)
     base64 = kwargs.pop("base64", None)
     handler = kwargs.pop("handler", None)
-    init_function = kwargs.pop("init_function", None)
     lang = kwargs.pop("lang", None)
 
     if source is not None:

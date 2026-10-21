@@ -4,11 +4,9 @@
 
 from __future__ import annotations
 
-from enum import Enum
-
+from digitalhub_runtime_python.entities.function.python.models import Lang
 from pydantic import BaseModel, ConfigDict, Field
 
-from digitalhub_runtime_python.entities.function.python.models import Lang
 
 class RaySourceValidator(BaseModel):
     """
@@ -22,7 +20,6 @@ class RaySourceValidator(BaseModel):
 
     handler: str | None = None
     "Function entrypoint."
-
 
     code: str = None
     "Source code (plain text)."
