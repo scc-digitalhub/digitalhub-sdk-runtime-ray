@@ -1,0 +1,56 @@
+{
+    "id": "ray-job-run1",
+    "key": "store://demo-etl/run/ray+job:run/ray-job-run1",
+    "kind": "ray+job:run",
+    "metadata": {
+        "name": "ray-job-run1",
+        "project": "demo-etl"
+    },
+    "name": "ray-job-run1",
+    "project": "demo-etl",
+    "spec": {
+        "task": "ray+job://demo-etl/ray-job-task1",
+        "function": "ray://demo-etl/ray-function1",
+        "volumes": [
+            {
+                "volume_type": "empty_dir",
+                "name": "volume1",
+                "mount_path": "/volume1"
+            },
+            {
+                "volume_type": "persistent_volume_claim",
+                "name": "volume2",
+                "mount_path": "/volume2"
+            }
+        ],
+        "resources": {
+            "cpu": "1",
+            "mem": "1Gi",
+            "gpu": "1",
+            "disk": "1Gi"
+        },
+        "envs": [
+            {
+                "name": "USER",
+                "value": "test"
+            }
+        ],
+        "secrets": [
+            "secret-key"
+        ],
+        "profile": "1xa100",
+        "inputs": {
+            "di": "store://demo-etl/dataitem/dataitem/dataitem1"
+        },
+        "parameters": {
+            "param1": 100
+        },
+        "replicas": 1,
+        "min_replicas": 1,
+        "max_replicas": 2
+    },
+    "status": {
+        "state": "CREATED"
+    },
+    "user": "digitalhubdev"
+}
