@@ -6,7 +6,7 @@ from __future__ import annotations
 
 from digitalhub.utils.exceptions import EntityError
 from digitalhub.utils.generic_utils import encode_string
-from digitalhub_runtime_python.entities.function.python.models import Lang
+from digitalhub_runtime_python.entities.function._base.models import Lang
 
 
 def source_check(**kwargs) -> dict:

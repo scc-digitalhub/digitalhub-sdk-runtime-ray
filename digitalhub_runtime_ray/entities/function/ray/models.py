@@ -4,7 +4,7 @@
 
 from __future__ import annotations
 
-from digitalhub_runtime_python.entities.function.python.models import Lang
+from digitalhub_runtime_python.entities.function._base.models import Lang
 from pydantic import BaseModel, ConfigDict, Field
 
 
