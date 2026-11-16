@@ -4,28 +4,18 @@
 
 from __future__ import annotations
 
+from typing import ClassVar
+
+from digitalhub.entities._mixin.source.models import HandlerSourceCode
 from digitalhub_runtime_python.entities.function._base.models import Lang
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import Field
 
 
-class RaySourceValidator(BaseModel):
-    """
-    Source code params.
-    """
+class RaySourceCode(HandlerSourceCode):
+    """Source code model for Ray functions."""
 
-    model_config = ConfigDict(use_enum_values=True)
-
-    source: str = None
-    "Pointer to source code."
-
-    handler: str | None = None
-    "Function entrypoint."
-
-    code: str = None
-    "Source code (plain text)."
-
-    base64: str = None
-    "Source code (base64 encoded)."
-
+    DEFAULT_LANG: ClassVar[str | None] = "python"
     lang: Lang = Field(default=Lang.PYTHON.value)
-    "Source code language (hint)."
+
+
+RaySourceValidator = RaySourceCode

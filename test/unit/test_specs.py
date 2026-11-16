@@ -6,6 +6,7 @@ import pytest
 from digitalhub.entities._constructors.spec import build_spec
 from pydantic import ValidationError
 
+from digitalhub_runtime_ray.entities.function.ray.builder import FunctionRayBuilder
 from digitalhub_runtime_ray.entities.function.ray.models import RaySourceValidator
 from digitalhub_runtime_ray.entities.function.ray.spec import FunctionSpecRay
 from digitalhub_runtime_ray.entities.run.ray_build.spec import RunSpecRayRunBuild
@@ -18,15 +19,33 @@ def test_ray_function_spec_validates_nested_source_and_runtime_fields():
     spec = build_spec(
         FunctionSpecRay,
         source={"handler": "predict", "code": "def predict(): pass"},
+        init_function="initialize",
         ray_version="2.40.0",
     )
 
     assert isinstance(spec.source, RaySourceValidator)
     assert spec.source.handler == "predict"
+    assert spec.init_function == "initialize"
     assert spec.ray_version == "2.40.0"
 
     with pytest.raises(TypeError, match="unknown_option"):
         build_spec(FunctionSpecRay, source={"handler": "predict"}, unknown_option=True)
+
+
+def test_ray_builder_preserves_init_function_on_outer_spec():
+    builder = FunctionRayBuilder()
+
+    function = builder.build(
+        kind=builder.ENTITY_KIND,
+        project="project",
+        name="function",
+        code="def predict(): pass",
+        handler="predict",
+        init_function="initialize",
+    )
+
+    assert function.spec.source.base64 == "ZGVmIHByZWRpY3QoKTogcGFzcw=="
+    assert function.spec.init_function == "initialize"
 
 
 def test_ray_task_specs_validate_action_fields():

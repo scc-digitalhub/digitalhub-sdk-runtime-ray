@@ -6,7 +6,7 @@ from __future__ import annotations
 
 from digitalhub_runtime_python.entities.function._base.spec import FunctionBaseSpec
 
-from digitalhub_runtime_ray.entities.function.ray.models import RaySourceValidator
+from digitalhub_runtime_ray.entities.function.ray.models import RaySourceCode
 
 
 class FunctionSpecRay(FunctionBaseSpec):
@@ -14,7 +14,8 @@ class FunctionSpecRay(FunctionBaseSpec):
     FunctionSpecRay specifications.
     """
 
-    source: RaySourceValidator
+    source: RaySourceCode
+    init_function: str | None = None
     ray_version: str | None = None
 
 

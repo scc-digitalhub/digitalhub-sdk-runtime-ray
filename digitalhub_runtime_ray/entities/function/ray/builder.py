@@ -11,7 +11,6 @@ from digitalhub_runtime_ray.entities._commons.enums import EntityKinds
 from digitalhub_runtime_ray.entities.function.ray.entity import FunctionRay
 from digitalhub_runtime_ray.entities.function.ray.spec import FunctionSpecRay
 from digitalhub_runtime_ray.entities.function.ray.status import FunctionStatusRay
-from digitalhub_runtime_ray.entities.function.ray.utils import source_check
 
 
 class FunctionRayBuilder(FunctionBaseBuilder, RuntimeEntityBuilderRay):
@@ -23,9 +22,3 @@ class FunctionRayBuilder(FunctionBaseBuilder, RuntimeEntityBuilderRay):
     ENTITY_SPEC_CLASS = FunctionSpecRay
     ENTITY_STATUS_CLASS = FunctionStatusRay
     ENTITY_KIND = EntityKinds.FUNCTION_RAY.value
-
-    def _prepare_source(self, source: dict) -> dict:
-        return source_check(source=source)["source"]
-
-    def _prepare_kwargs(self, kwargs: dict) -> dict:
-        return source_check(**kwargs)

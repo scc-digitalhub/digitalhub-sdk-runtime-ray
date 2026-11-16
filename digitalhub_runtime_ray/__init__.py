@@ -2,17 +2,3 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 from digitalhub_runtime_ray.entities import entity_plugins
-from digitalhub_runtime_ray.entities._commons.enums import EntityKinds
-
-entity_builders = tuple((plugin.kind, plugin.builder) for plugin in entity_plugins)
-
-try:
-    from digitalhub_runtime_ray.runtimes.builder import RuntimeRayBuilder
-
-    runtime_builders = ((kind, RuntimeRayBuilder) for kind in [e.value for e in EntityKinds])
-except ImportError as e:
-    from digitalhub.utils.logger.logger import get_logger
-
-    logger = get_logger(__name__)
-    logger.debug(f"Error importing runtime builders: {e}")
-    runtime_builders = ()
