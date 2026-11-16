@@ -4,12 +4,12 @@
 
 from __future__ import annotations
 
-from digitalhub_runtime_python.entities.run._base.spec import RunSpecBaseRun, RunValidatorBaseRun
+from digitalhub_runtime_python.entities.run._base.spec import RunSpecPython
 
 
-class RunSpecRayRunBuild(RunSpecBaseRun):
+class RunSpecRayRunBuild(RunSpecPython):
     """RunSpecRayRunBuild specifications."""
 
 
-class RunValidatorRayRunBuild(RunValidatorBaseRun):
-    """RunValidatorRayRunBuild validator."""
+class RunValidatorRayRunBuild(RunSpecRayRunBuild):
+    """Compatibility name for the typed Ray build-run spec."""
