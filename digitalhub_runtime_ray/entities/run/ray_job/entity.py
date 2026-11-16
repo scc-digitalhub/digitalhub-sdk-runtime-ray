@@ -13,7 +13,10 @@ if typing.TYPE_CHECKING:
     from digitalhub_runtime_ray.entities.run.ray_job.status import RunStatusRayRunJob
 
 
-class RunRayRunJob(RunBaseRun):
+from digitalhub.entities.run._base.entity import LocalExecutionRunMixin
+
+
+class RunRayRunJob(LocalExecutionRunMixin, RunBaseRun):
     """
     RunRayRunJob class.
     """
@@ -23,17 +26,6 @@ class RunRayRunJob(RunBaseRun):
 
         self.spec: RunSpecRayRunJob
         self.status: RunStatusRayRunJob
-
-    def local_execution(self) -> bool:
-        """
-        Check if run has local execution.
-
-        Returns
-        -------
-        bool
-            True if run has local execution, False otherwise.
-        """
-        return self.spec.local_execution
 
     def add_output(self, name: str, value: str) -> None:
         """

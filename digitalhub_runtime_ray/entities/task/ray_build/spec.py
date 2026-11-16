@@ -4,13 +4,11 @@
 
 from __future__ import annotations
 
-from digitalhub.entities.task._base.spec import TaskSpecFunction
+from digitalhub.entities.task._base.spec import BuildSpecMixin, TaskSpecFunction
 
 
-class TaskSpecRayBuild(TaskSpecFunction):
+class TaskSpecRayBuild(TaskSpecFunction, BuildSpecMixin):
     """TaskSpecRayBuild specifications."""
-
-    instructions: list[str] | None = None
 
 
 class TaskValidatorRayBuild(TaskSpecRayBuild):

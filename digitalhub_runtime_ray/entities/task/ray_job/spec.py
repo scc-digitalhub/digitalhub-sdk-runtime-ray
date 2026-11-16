@@ -4,17 +4,20 @@
 
 from __future__ import annotations
 
+from digitalhub.entities._base.entity.spec import Spec
 from digitalhub.entities.task._base.spec import TaskSpecFunction
 
 
-class TaskSpecRayJob(TaskSpecFunction):
-    """
-    TaskSpecRayJob specifications.
-    """
-
+class RayJobSpecMixin(Spec):
     replicas: int | None = None
     min_replicas: int | None = None
     max_replicas: int | None = None
+
+
+class TaskSpecRayJob(TaskSpecFunction, RayJobSpecMixin):
+    """
+    TaskSpecRayJob specifications.
+    """
 
 
 class TaskValidatorRayJob(TaskSpecRayJob):

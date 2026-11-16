@@ -49,17 +49,30 @@ def test_ray_run_specs_keep_run_fields_separate_from_task_build_fields():
         local_execution=True,
         inputs={"sample": "value"},
         parameters={"threshold": 0.5},
+        replicas=2,
+        min_replicas=1,
+        max_replicas=4,
     )
 
     assert run.local_execution is True
     assert run.inputs == {"sample": "value"}
     assert run.parameters == {"threshold": 0.5}
-
-    with pytest.raises(TypeError, match="replicas"):
-        build_spec(RunSpecRayRunJob, task="ray+job://task", replicas=2)
+    assert run.replicas == 2
+    assert run.min_replicas == 1
+    assert run.max_replicas == 4
 
     with pytest.raises(TypeError, match="service_type"):
         build_spec(RunSpecRayRunJob, task="ray+job://task", service_type="ClusterIP")
 
     with pytest.raises(TypeError, match="instructions"):
-        build_spec(RunSpecRayRunBuild, task="ray+build://task", instructions=["install ray"])
+        build_spec(RunSpecRayRunJob, task="ray+job://task", instructions=["install ray"])
+
+    build = build_spec(
+        RunSpecRayRunBuild,
+        task="ray+build://task",
+        instructions=["install ray"],
+    )
+    assert build.instructions == ["install ray"]
+
+    with pytest.raises(TypeError, match="replicas"):
+        build_spec(RunSpecRayRunBuild, task="ray+build://task", replicas=2)

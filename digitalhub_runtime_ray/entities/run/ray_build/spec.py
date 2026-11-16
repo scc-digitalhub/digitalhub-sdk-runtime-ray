@@ -4,10 +4,11 @@
 
 from __future__ import annotations
 
+from digitalhub.entities.task._base.spec import BuildSpecMixin
 from digitalhub_runtime_python.entities.run._base.spec import RunSpecPython
 
 
-class RunSpecRayRunBuild(RunSpecPython):
+class RunSpecRayRunBuild(RunSpecPython, BuildSpecMixin):
     """RunSpecRayRunBuild specifications."""
 
 
