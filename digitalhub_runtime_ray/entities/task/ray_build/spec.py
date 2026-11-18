@@ -11,5 +11,4 @@ class TaskSpecRayBuild(TaskSpecFunction, BuildSpecMixin):
     """TaskSpecRayBuild specifications."""
 
 
-class TaskValidatorRayBuild(TaskSpecRayBuild):
-    """Compatibility name for the typed Ray build-task spec."""
+TaskValidatorRayBuild = TaskSpecRayBuild

@@ -8,11 +8,25 @@ from pydantic import ValidationError
 
 from digitalhub_runtime_ray.entities.function.ray.builder import FunctionRayBuilder
 from digitalhub_runtime_ray.entities.function.ray.models import RaySourceValidator
-from digitalhub_runtime_ray.entities.function.ray.spec import FunctionSpecRay
-from digitalhub_runtime_ray.entities.run.ray_build.spec import RunSpecRayRunBuild
-from digitalhub_runtime_ray.entities.run.ray_job.spec import RunSpecRayRunJob
-from digitalhub_runtime_ray.entities.task.ray_build.spec import TaskSpecRayBuild
-from digitalhub_runtime_ray.entities.task.ray_job.spec import TaskSpecRayJob
+from digitalhub_runtime_ray.entities.function.ray.spec import FunctionSpecRay, FunctionValidatorRay
+from digitalhub_runtime_ray.entities.run.ray_build.spec import RunSpecRayRunBuild, RunValidatorRayRunBuild
+from digitalhub_runtime_ray.entities.run.ray_job.spec import RunSpecRayRunJob, RunValidatorRayRunJob
+from digitalhub_runtime_ray.entities.task.ray_build.spec import TaskSpecRayBuild, TaskValidatorRayBuild
+from digitalhub_runtime_ray.entities.task.ray_job.spec import TaskSpecRayJob, TaskValidatorRayJob
+
+
+@pytest.mark.parametrize(
+    ("compatibility_name", "spec_class"),
+    [
+        (FunctionValidatorRay, FunctionSpecRay),
+        (TaskValidatorRayBuild, TaskSpecRayBuild),
+        (TaskValidatorRayJob, TaskSpecRayJob),
+        (RunValidatorRayRunBuild, RunSpecRayRunBuild),
+        (RunValidatorRayRunJob, RunSpecRayRunJob),
+    ],
+)
+def test_validator_names_are_spec_aliases(compatibility_name, spec_class):
+    assert compatibility_name is spec_class
 
 
 def test_ray_function_spec_validates_nested_source_and_runtime_fields():

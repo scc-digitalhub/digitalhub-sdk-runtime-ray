@@ -9,8 +9,9 @@ import typing
 from digitalhub_runtime_python.entities.run._base.entity import RunBaseRun
 
 if typing.TYPE_CHECKING:
+    from digitalhub_runtime_python.entities.run._base.status import RunStatusBaseRun
+
     from digitalhub_runtime_ray.entities.run.ray_job.spec import RunSpecRayRunJob
-    from digitalhub_runtime_ray.entities.run.ray_job.status import RunStatusRayRunJob
 
 
 from digitalhub.entities.run._base.entity import LocalExecutionRunMixin
@@ -25,7 +26,7 @@ class RunRayRunJob(LocalExecutionRunMixin, RunBaseRun):
         super().__init__(*args, **kwargs)
 
         self.spec: RunSpecRayRunJob
-        self.status: RunStatusRayRunJob
+        self.status: RunStatusBaseRun
 
     def add_output(self, name: str, value: str) -> None:
         """

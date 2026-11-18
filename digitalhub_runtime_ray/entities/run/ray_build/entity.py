@@ -9,8 +9,9 @@ import typing
 from digitalhub_runtime_python.entities.run._base.entity import RunBaseBuildRun
 
 if typing.TYPE_CHECKING:
+    from digitalhub_runtime_python.entities.run._base.status import RunStatusBaseRun
+
     from digitalhub_runtime_ray.entities.run.ray_build.spec import RunSpecRayRunBuild
-    from digitalhub_runtime_ray.entities.run.ray_build.status import RunStatusRayRunBuild
 
 
 class RunRayRunBuild(RunBaseBuildRun):
@@ -22,4 +23,4 @@ class RunRayRunBuild(RunBaseBuildRun):
         super().__init__(*args, **kwargs)
 
         self.spec: RunSpecRayRunBuild
-        self.status: RunStatusRayRunBuild
+        self.status: RunStatusBaseRun

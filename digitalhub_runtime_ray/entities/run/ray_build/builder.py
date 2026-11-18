@@ -5,12 +5,12 @@
 from __future__ import annotations
 
 from digitalhub.entities.run._base.builder import RunBuilder
+from digitalhub_runtime_python.entities.run._base.status import RunStatusBaseRun
 
 from digitalhub_runtime_ray.entities._base.runtime_entity.builder import RuntimeEntityBuilderRay
 from digitalhub_runtime_ray.entities._commons.enums import EntityKinds
 from digitalhub_runtime_ray.entities.run.ray_build.entity import RunRayRunBuild
 from digitalhub_runtime_ray.entities.run.ray_build.spec import RunSpecRayRunBuild
-from digitalhub_runtime_ray.entities.run.ray_build.status import RunStatusRayRunBuild
 
 
 class RunRayRunBuildBuilder(RunBuilder, RuntimeEntityBuilderRay):
@@ -20,5 +20,5 @@ class RunRayRunBuildBuilder(RunBuilder, RuntimeEntityBuilderRay):
 
     ENTITY_CLASS = RunRayRunBuild
     ENTITY_SPEC_CLASS = RunSpecRayRunBuild
-    ENTITY_STATUS_CLASS = RunStatusRayRunBuild
+    ENTITY_STATUS_CLASS = RunStatusBaseRun
     ENTITY_KIND = EntityKinds.RUN_RAY_BUILD.value

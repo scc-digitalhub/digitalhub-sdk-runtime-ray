@@ -9,8 +9,9 @@ import typing
 from digitalhub_runtime_python.entities.function._base.entity import FunctionBaseFunction
 
 if typing.TYPE_CHECKING:
+    from digitalhub.entities._base.entity.status import Status
+
     from digitalhub_runtime_ray.entities.function.ray.spec import FunctionSpecRay
-    from digitalhub_runtime_ray.entities.function.ray.status import FunctionStatusRay
 
 
 class FunctionRay(FunctionBaseFunction):
@@ -22,4 +23,4 @@ class FunctionRay(FunctionBaseFunction):
         super().__init__(*args, **kwargs)
 
         self.spec: FunctionSpecRay
-        self.status: FunctionStatusRay
+        self.status: Status

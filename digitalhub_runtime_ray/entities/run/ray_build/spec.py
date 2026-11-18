@@ -12,5 +12,4 @@ class RunSpecRayRunBuild(RunSpecPython, BuildSpecMixin):
     """RunSpecRayRunBuild specifications."""
 
 
-class RunValidatorRayRunBuild(RunSpecRayRunBuild):
-    """Compatibility name for the typed Ray build-run spec."""
+RunValidatorRayRunBuild = RunSpecRayRunBuild

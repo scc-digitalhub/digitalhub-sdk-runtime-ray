@@ -14,5 +14,4 @@ class RunSpecRayRunJob(RunSpecPython, RayJobSpecMixin, LocalExecutionSpecMixin):
     """RunSpecRayRunJob specifications."""
 
 
-class RunValidatorRayRunJob(RunSpecRayRunJob):
-    """Compatibility name for the typed Ray job-run spec."""
+RunValidatorRayRunJob = RunSpecRayRunJob

@@ -19,5 +19,4 @@ class FunctionSpecRay(FunctionBaseSpec):
     ray_version: str | None = None
 
 
-class FunctionValidatorRay(FunctionSpecRay):
-    """Compatibility name for the typed Ray function spec."""
+FunctionValidatorRay = FunctionSpecRay

@@ -20,5 +20,4 @@ class TaskSpecRayJob(TaskSpecFunction, RayJobSpecMixin):
     """
 
 
-class TaskValidatorRayJob(TaskSpecRayJob):
-    """Compatibility name for the typed Ray job-task spec."""
+TaskValidatorRayJob = TaskSpecRayJob
