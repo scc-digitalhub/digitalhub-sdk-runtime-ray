@@ -17,6 +17,3 @@ class FunctionSpecRay(FunctionBaseSpec):
     source: RaySourceCode
     init_function: str | None = None
     ray_version: str | None = None
-
-
-FunctionValidatorRay = FunctionSpecRay

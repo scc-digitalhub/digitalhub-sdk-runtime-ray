@@ -6,27 +6,14 @@ import pytest
 from digitalhub.entities._constructors.spec import build_spec
 from pydantic import ValidationError
 
+from digitalhub_runtime_ray.entities._mixin.execution.spec import RayJobSpecMixin
 from digitalhub_runtime_ray.entities.function.ray.builder import FunctionRayBuilder
-from digitalhub_runtime_ray.entities.function.ray.models import RaySourceValidator
-from digitalhub_runtime_ray.entities.function.ray.spec import FunctionSpecRay, FunctionValidatorRay
-from digitalhub_runtime_ray.entities.run.ray_build.spec import RunSpecRayRunBuild, RunValidatorRayRunBuild
-from digitalhub_runtime_ray.entities.run.ray_job.spec import RunSpecRayRunJob, RunValidatorRayRunJob
-from digitalhub_runtime_ray.entities.task.ray_build.spec import TaskSpecRayBuild, TaskValidatorRayBuild
-from digitalhub_runtime_ray.entities.task.ray_job.spec import TaskSpecRayJob, TaskValidatorRayJob
-
-
-@pytest.mark.parametrize(
-    ("compatibility_name", "spec_class"),
-    [
-        (FunctionValidatorRay, FunctionSpecRay),
-        (TaskValidatorRayBuild, TaskSpecRayBuild),
-        (TaskValidatorRayJob, TaskSpecRayJob),
-        (RunValidatorRayRunBuild, RunSpecRayRunBuild),
-        (RunValidatorRayRunJob, RunSpecRayRunJob),
-    ],
-)
-def test_validator_names_are_spec_aliases(compatibility_name, spec_class):
-    assert compatibility_name is spec_class
+from digitalhub_runtime_ray.entities.function.ray.models import RaySourceCode
+from digitalhub_runtime_ray.entities.function.ray.spec import FunctionSpecRay
+from digitalhub_runtime_ray.entities.run.ray_build.spec import RunSpecRayRunBuild
+from digitalhub_runtime_ray.entities.run.ray_job.spec import RunSpecRayRunJob
+from digitalhub_runtime_ray.entities.task.ray_build.spec import TaskSpecRayBuild
+from digitalhub_runtime_ray.entities.task.ray_job.spec import TaskSpecRayJob
 
 
 def test_ray_function_spec_validates_nested_source_and_runtime_fields():
@@ -37,7 +24,7 @@ def test_ray_function_spec_validates_nested_source_and_runtime_fields():
         ray_version="2.40.0",
     )
 
-    assert isinstance(spec.source, RaySourceValidator)
+    assert isinstance(spec.source, RaySourceCode)
     assert spec.source.handler == "predict"
     assert spec.init_function == "initialize"
     assert spec.ray_version == "2.40.0"
@@ -75,9 +62,15 @@ def test_ray_task_specs_validate_action_fields():
         build_spec(TaskSpecRayBuild, function="function", instructions=["valid", 3])
 
 
+def test_ray_job_spec_mixin_has_one_runtime_owner():
+    assert RayJobSpecMixin in TaskSpecRayJob.__mro__
+    assert RayJobSpecMixin in RunSpecRayRunJob.__mro__
+
+
 def test_ray_run_specs_keep_run_fields_separate_from_task_build_fields():
     run = build_spec(
         RunSpecRayRunJob,
+        function="function",
         task="ray+job://task",
         local_execution=True,
         inputs={"sample": "value"},
@@ -95,17 +88,18 @@ def test_ray_run_specs_keep_run_fields_separate_from_task_build_fields():
     assert run.max_replicas == 4
 
     with pytest.raises(TypeError, match="service_type"):
-        build_spec(RunSpecRayRunJob, task="ray+job://task", service_type="ClusterIP")
+        build_spec(RunSpecRayRunJob, function="function", task="ray+job://task", service_type="ClusterIP")
 
     with pytest.raises(TypeError, match="instructions"):
-        build_spec(RunSpecRayRunJob, task="ray+job://task", instructions=["install ray"])
+        build_spec(RunSpecRayRunJob, function="function", task="ray+job://task", instructions=["install ray"])
 
     build = build_spec(
         RunSpecRayRunBuild,
+        function="function",
         task="ray+build://task",
         instructions=["install ray"],
     )
     assert build.instructions == ["install ray"]
 
     with pytest.raises(TypeError, match="replicas"):
-        build_spec(RunSpecRayRunBuild, task="ray+build://task", replicas=2)
+        build_spec(RunSpecRayRunBuild, function="function", task="ray+build://task", replicas=2)

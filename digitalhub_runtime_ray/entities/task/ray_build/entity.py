@@ -9,8 +9,9 @@ import typing
 from digitalhub.entities.task._base.entity import Task
 
 if typing.TYPE_CHECKING:
+    from digitalhub.entities._base.entity.status import Status
+
     from digitalhub_runtime_ray.entities.task.ray_build.spec import TaskSpecRayBuild
-    from digitalhub_runtime_ray.entities.task.ray_build.status import TaskStatusRayBuild
 
 
 class TaskRayBuild(Task):
@@ -22,4 +23,4 @@ class TaskRayBuild(Task):
         super().__init__(*args, **kwargs)
 
         self.spec: TaskSpecRayBuild
-        self.status: TaskStatusRayBuild
+        self.status: Status

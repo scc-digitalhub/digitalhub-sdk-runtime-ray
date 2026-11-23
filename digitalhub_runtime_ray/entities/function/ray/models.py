@@ -16,6 +16,3 @@ class RaySourceCode(HandlerSourceCode):
 
     DEFAULT_LANG: ClassVar[str | None] = "python"
     lang: Lang = Field(default=Lang.PYTHON.value)
-
-
-RaySourceValidator = RaySourceCode
