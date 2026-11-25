@@ -3,11 +3,12 @@
 # SPDX-License-Identifier: Apache-2.0
 
 import pytest
+from digitalhub.factory.registry import registry
 from digitalhub.plugins import build_spec
 from pydantic import ValidationError
 
+from digitalhub_runtime_ray.entities._commons.enums import EntityKinds
 from digitalhub_runtime_ray.entities._mixin.execution.spec import RayJobSpecMixin
-from digitalhub_runtime_ray.entities.function.ray.builder import FunctionRayBuilder
 from digitalhub_runtime_ray.entities.function.ray.models import RaySourceCode
 from digitalhub_runtime_ray.entities.function.ray.spec import FunctionSpecRay
 from digitalhub_runtime_ray.entities.run.ray_build.spec import RunSpecRayRunBuild
@@ -34,7 +35,7 @@ def test_ray_function_spec_validates_nested_source_and_runtime_fields():
 
 
 def test_ray_builder_preserves_init_function_on_outer_spec():
-    builder = FunctionRayBuilder()
+    builder = registry.get_entity_builder(EntityKinds.FUNCTION_RAY.value)
 
     function = builder.build(
         kind=builder.ENTITY_KIND,
