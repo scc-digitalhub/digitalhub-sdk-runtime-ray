@@ -4,7 +4,7 @@
 
 from __future__ import annotations
 
-from digitalhub.entities._base.entity.status import Status
+from digitalhub.plugins import Status
 from digitalhub_runtime_python.entities.function._base.builder import FunctionBaseBuilder
 
 from digitalhub_runtime_ray.entities._base.runtime_entity.builder import RuntimeEntityBuilderRay

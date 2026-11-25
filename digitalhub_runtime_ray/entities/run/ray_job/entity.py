@@ -14,7 +14,7 @@ if typing.TYPE_CHECKING:
     from digitalhub_runtime_ray.entities.run.ray_job.spec import RunSpecRayRunJob
 
 
-from digitalhub.entities.run._base.entity import LocalExecutionRunMixin
+from digitalhub.plugins import LocalExecutionRunMixin
 
 
 class RunRayRunJob(LocalExecutionRunMixin, RunBaseRun):
