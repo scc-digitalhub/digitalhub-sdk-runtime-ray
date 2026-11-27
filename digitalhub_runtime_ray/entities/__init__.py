@@ -15,13 +15,13 @@ from digitalhub.plugins import (
     Task,
     TaskBuilder,
 )
+from digitalhub_runtime_python.entities.function.python.entity import FunctionPython
 from digitalhub_runtime_python.entities.run._base.entity import RunBaseBuildRun
 from digitalhub_runtime_python.entities.run._base.status import RunStatusBaseRun
 from digitalhub_runtime_python.entities.run.python_job.entity import RunPythonRunJob
 
 from digitalhub_runtime_ray.entities._commons.enums import Actions, EntityKinds
 from digitalhub_runtime_ray.entities.function.ray.crud import new_function_ray
-from digitalhub_runtime_ray.entities.function.ray.entity import FunctionRay
 from digitalhub_runtime_ray.entities.function.ray.spec import FunctionSpecRay
 from digitalhub_runtime_ray.entities.run.ray_build.spec import RunSpecRayRunBuild
 from digitalhub_runtime_ray.entities.run.ray_job.spec import RunSpecRayRunJob
@@ -35,7 +35,7 @@ RUNTIME_RAY_BUILDER = "digitalhub_runtime_ray.runtimes.builder:RuntimeRayBuilder
 ray = ExecFamily(
     executable=BuilderDef(
         EntityKinds.FUNCTION_RAY,
-        FunctionRay,
+        FunctionPython,
         FunctionSpecRay,
         Status,
         base=FunctionBuilder,

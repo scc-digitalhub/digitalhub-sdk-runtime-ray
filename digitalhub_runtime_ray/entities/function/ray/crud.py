@@ -11,7 +11,7 @@ from digitalhub.entities.function.crud import new_function
 from digitalhub_runtime_ray.entities._commons.enums import EntityKinds
 
 if typing.TYPE_CHECKING:
-    from digitalhub_runtime_ray.entities.function.ray.entity import FunctionRay
+    from digitalhub_runtime_python.entities.function.python.entity import FunctionPython
 
 
 def new_function_ray(
@@ -34,7 +34,7 @@ def new_function_ray(
     description: str | None = None,
     labels: list[str] | None = None,
     embedded: bool = False,
-) -> FunctionRay:
+) -> FunctionPython:
     """
     Create a Ray function entity.
 
