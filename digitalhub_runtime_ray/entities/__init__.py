@@ -11,21 +11,20 @@ from digitalhub.plugins import (
     RunBuilder,
     SourceBuilderMixin,
     Status,
+    Task,
     TaskBuilder,
 )
+from digitalhub_runtime_python.entities.run._base.entity import RunBaseBuildRun
 from digitalhub_runtime_python.entities.run._base.status import RunStatusBaseRun
 
 from digitalhub_runtime_ray.entities._commons.enums import Actions, EntityKinds
 from digitalhub_runtime_ray.entities.function.ray.crud import new_function_ray
 from digitalhub_runtime_ray.entities.function.ray.entity import FunctionRay
 from digitalhub_runtime_ray.entities.function.ray.spec import FunctionSpecRay
-from digitalhub_runtime_ray.entities.run.ray_build.entity import RunRayRunBuild
 from digitalhub_runtime_ray.entities.run.ray_build.spec import RunSpecRayRunBuild
 from digitalhub_runtime_ray.entities.run.ray_job.entity import RunRayRunJob
 from digitalhub_runtime_ray.entities.run.ray_job.spec import RunSpecRayRunJob
-from digitalhub_runtime_ray.entities.task.ray_build.entity import TaskRayBuild
 from digitalhub_runtime_ray.entities.task.ray_build.spec import TaskSpecRayBuild
-from digitalhub_runtime_ray.entities.task.ray_job.entity import TaskRayJob
 from digitalhub_runtime_ray.entities.task.ray_job.spec import TaskSpecRayJob
 
 # Imported on first use: the entities register even when the runtime cannot be
@@ -44,13 +43,13 @@ ray = ExecFamily(
     ),
     actions={
         Actions.JOB: Action(
-            task=BuilderDef(EntityKinds.TASK_RAY_JOB, TaskRayJob, TaskSpecRayJob, Status, base=TaskBuilder),
+            task=BuilderDef(EntityKinds.TASK_RAY_JOB, Task, TaskSpecRayJob, Status, base=TaskBuilder),
             run=BuilderDef(EntityKinds.RUN_RAY_JOB, RunRayRunJob, RunSpecRayRunJob, RunStatusBaseRun, base=RunBuilder),
         ),
         Actions.BUILD: Action(
-            task=BuilderDef(EntityKinds.TASK_RAY_BUILD, TaskRayBuild, TaskSpecRayBuild, Status, base=TaskBuilder),
+            task=BuilderDef(EntityKinds.TASK_RAY_BUILD, Task, TaskSpecRayBuild, Status, base=TaskBuilder),
             run=BuilderDef(
-                EntityKinds.RUN_RAY_BUILD, RunRayRunBuild, RunSpecRayRunBuild, RunStatusBaseRun, base=RunBuilder
+                EntityKinds.RUN_RAY_BUILD, RunBaseBuildRun, RunSpecRayRunBuild, RunStatusBaseRun, base=RunBuilder
             ),
         ),
     },
