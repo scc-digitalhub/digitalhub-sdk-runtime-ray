@@ -7,6 +7,7 @@ from digitalhub.plugins import (
     BuilderDef,
     CrudPlugin,
     ExecFamily,
+    ExecutableActions,
     FunctionBuilder,
     RunBuilder,
     SourceBuilderMixin,
@@ -16,13 +17,13 @@ from digitalhub.plugins import (
 )
 from digitalhub_runtime_python.entities.run._base.entity import RunBaseBuildRun
 from digitalhub_runtime_python.entities.run._base.status import RunStatusBaseRun
+from digitalhub_runtime_python.entities.run.python_job.entity import RunPythonRunJob
 
 from digitalhub_runtime_ray.entities._commons.enums import Actions, EntityKinds
 from digitalhub_runtime_ray.entities.function.ray.crud import new_function_ray
 from digitalhub_runtime_ray.entities.function.ray.entity import FunctionRay
 from digitalhub_runtime_ray.entities.function.ray.spec import FunctionSpecRay
 from digitalhub_runtime_ray.entities.run.ray_build.spec import RunSpecRayRunBuild
-from digitalhub_runtime_ray.entities.run.ray_job.entity import RunRayRunJob
 from digitalhub_runtime_ray.entities.run.ray_job.spec import RunSpecRayRunJob
 from digitalhub_runtime_ray.entities.task.ray_build.spec import TaskSpecRayBuild
 from digitalhub_runtime_ray.entities.task.ray_job.spec import TaskSpecRayJob
@@ -44,9 +45,11 @@ ray = ExecFamily(
     actions={
         Actions.JOB: Action(
             task=BuilderDef(EntityKinds.TASK_RAY_JOB, Task, TaskSpecRayJob, Status, base=TaskBuilder),
-            run=BuilderDef(EntityKinds.RUN_RAY_JOB, RunRayRunJob, RunSpecRayRunJob, RunStatusBaseRun, base=RunBuilder),
+            run=BuilderDef(
+                EntityKinds.RUN_RAY_JOB, RunPythonRunJob, RunSpecRayRunJob, RunStatusBaseRun, base=RunBuilder
+            ),
         ),
-        Actions.BUILD: Action(
+        ExecutableActions.BUILD: Action(
             task=BuilderDef(EntityKinds.TASK_RAY_BUILD, Task, TaskSpecRayBuild, Status, base=TaskBuilder),
             run=BuilderDef(
                 EntityKinds.RUN_RAY_BUILD, RunBaseBuildRun, RunSpecRayRunBuild, RunStatusBaseRun, base=RunBuilder
